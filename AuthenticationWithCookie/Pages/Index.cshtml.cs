@@ -31,7 +31,7 @@ public class IndexModel : PageModel
             var authProperties = new AuthenticationProperties
             {
                 AllowRefresh = true,
-                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(0.5),
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
 
             };
             var user = new ClaimsPrincipal(claimsIdentity);
