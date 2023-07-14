@@ -4,16 +4,18 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
+using System;
 
 namespace AuthenticationWithCookie.Pages;
 
 public class IndexModel : PageModel
 {
-    public string ErrorMessage { get; set; }
+    [BindProperty]
+    public LoginInput LoginInput { get; set; }
     public async Task<IActionResult> OnPost()
    {
-       string username = Request.Form["myUsername"];
-       string password = Request.Form["myPassword"];
+        string username = LoginInput.UserName;
+        string password = LoginInput.Password;
        if(username==null || password==null) {
           ModelState.AddModelError("", "username and password fields must be entered");
           return Page();
@@ -41,7 +43,6 @@ public class IndexModel : PageModel
        else
        {
             ModelState.AddModelError("", "Invalid username or password");
-            ErrorMessage = "Invalid username or password";
             return Page();
         }
     }
@@ -50,4 +51,9 @@ public class IndexModel : PageModel
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         return RedirectToPage("/Index");
     }
+}
+public class LoginInput
+{
+    public string UserName { get; set; }
+    public string Password { get; set; }
 }

@@ -10,24 +10,27 @@
               <form method="post">
                 <div class="username" style="margin:10px;">
                     <label class="myusername">Username</label>
-                    <input type="text" name="myUsername" required title="Please enter your correct username" />
+                    <input type="text" name="LoginInput.Username" required title="Please enter your correct username" />
                 </div>
 
                 <div class="password" style="margin:10px;">
                     <label class="mypassword">Password</label>
-                    <input type="password" name="myPassword" required title="Please enter your correct password" />
+                    <input type="password" name="LoginInput.Password" required title="Please enter your correct password" />
                 </div>
 
                 <div class="login" style="margin:10px;">
                     <button type="submit" class="btn btn-primary">Login</button>
                 </div>
+                <div asp-validation-summary="ModelOnly" class="text-danger no-bullet" style="width:300px; ">
+                </div>
+                <style>
+                    .no-bullet ul, .no-bullet ol {
+                        list-style: none;
+                    }
+                </style>
               </form>
          </div>
    </div>
-    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
-    {
-        <p class="text-danger">@Model.ErrorMessage</p>
-    }
 
 }
 else
